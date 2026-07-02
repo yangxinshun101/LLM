@@ -1,0 +1,9 @@
+server:
+  port: 10188
+
+spring:
+  application:
+    name: Yxs-LLM
+  ai:
+    dashscope:
+      api-key: sk-7669f600093342d5922d0ce5bd25bc78
