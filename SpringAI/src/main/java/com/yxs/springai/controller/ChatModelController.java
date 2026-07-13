@@ -1,4 +1,4 @@
-package com.yxs.springai;
+package com.yxs.springai.controller;
 
 import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatModel;
 import jakarta.servlet.http.HttpServletResponse;

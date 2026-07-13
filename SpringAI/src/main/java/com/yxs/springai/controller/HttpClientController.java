@@ -1,4 +1,4 @@
-package com.yxs.springai;
+package com.yxs.springai.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

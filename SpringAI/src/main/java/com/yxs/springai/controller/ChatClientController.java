@@ -1,4 +1,4 @@
-package com.yxs.springai;
+package com.yxs.springai.controller;
 
 import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatOptions;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 @RestController
-@RequestMapping("/chat/stream")
-public class ChatClientStreamController implements InitializingBean {
+@RequestMapping("/chat/client")
+public class ChatClientController implements InitializingBean {
 
     @Autowired
     private ChatModel chatModel;
@@ -43,9 +43,9 @@ public class ChatClientStreamController implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        chatClient = ChatClient.builder(chatModel).defaultAdvisors(
-                        new SimpleLoggerAdvisor()
-                ).defaultSystem("请用英文回答问题")
+        chatClient = ChatClient.builder(chatModel)
+                .defaultAdvisors(new SimpleLoggerAdvisor())
+                .defaultSystem("请用英文回答问题")
                 .defaultOptions(
                         DashScopeChatOptions.builder()
                                 .temperature(0.7)
