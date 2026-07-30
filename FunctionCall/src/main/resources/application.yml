@@ -1,0 +1,18 @@
+server:
+  port: 8018
+spring:
+  application:
+    name: FunctionCall
+  ai:
+    dashscope:
+      api-key: @dashscope.api.key@
+    openai:
+      api-key: @dashscope.api.key@
+      base-url: https://dashscope.aliyuncs.com/compatible-mode/
+      chat:
+        options:
+          model: qwen-plus
+          temperature: 0.7
+          max-tokens: 1024
+
+

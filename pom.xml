@@ -53,6 +53,7 @@
 
     <modules>
         <module>SpringAI</module>
+        <module>FunctionCall</module>
     </modules>
 
 

@@ -11,7 +11,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   ai:
     dashscope:
-      api-key: sk-7669f600093342d5922d0ce5bd25bc78
+      api-key: @dashscope.api.key@
     chat:
       memory:
         repository:
