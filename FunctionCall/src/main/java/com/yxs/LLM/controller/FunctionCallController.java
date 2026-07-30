@@ -23,8 +23,10 @@ public class FunctionCallController {
 
     @RequestMapping("/call")
     public String functionCall(String message) {
-        return chatClient.prompt(message).toolNames("getTimeFunction").call().content();
+//        return chatClient.prompt(message).toolNames("getTimeFunction").call().content();
+        return chatClient.prompt(message).tools(new TimeTool()).call().content();
     }
+
 
     @PostConstruct
     public void init() {
