@@ -19,7 +19,7 @@ import reactor.core.publisher.Flux;
 public class ChatClientController implements InitializingBean {
 
     @Autowired
-    private ChatModel chatModel;
+    private ChatModel dashScopeChatModel;
 
     private ChatClient chatClient;
 
@@ -43,7 +43,7 @@ public class ChatClientController implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        chatClient = ChatClient.builder(chatModel)
+        chatClient = ChatClient.builder(dashScopeChatModel)
                 .defaultAdvisors(new SimpleLoggerAdvisor())
                 .defaultSystem("请用英文回答问题")
                 .defaultOptions(

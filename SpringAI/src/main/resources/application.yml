@@ -4,6 +4,21 @@ server:
 spring:
   application:
     name: Yxs-LLM
+  datasource:
+    url: jdbc:mysql://122.152.204.49:23306/llm?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true
+    username: root
+    password: twin@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
   ai:
     dashscope:
       api-key: sk-7669f600093342d5922d0ce5bd25bc78
+    chat:
+      memory:
+        repository:
+          jdbc:
+            platform: mysql
+
+    ollama:
+      base-url: http://192.168.31.20:11434
+      chat:
+        model: qwen2.5:7B

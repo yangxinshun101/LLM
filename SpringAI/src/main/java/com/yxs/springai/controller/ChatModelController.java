@@ -18,12 +18,12 @@ import reactor.core.publisher.Flux;
 public class ChatModelController {
 
     @Autowired
-    private DashScopeChatModel chatModel;
+    private DashScopeChatModel dashScopeChatModel;
 
     @RequestMapping("/call/string")
     public String callString(String messages) {
 
-        return chatModel.call(messages);
+        return dashScopeChatModel.call(messages);
     }
 
     @RequestMapping("/call/messages")
@@ -32,7 +32,7 @@ public class ChatModelController {
 
         Message userMessage = new UserMessage(messages);
 
-        return chatModel.call(message, userMessage);
+        return dashScopeChatModel.call(message, userMessage);
     }
 
     @RequestMapping("/call/prompt")
@@ -45,7 +45,7 @@ public class ChatModelController {
 
         Prompt prompt = Prompt.builder().messages(message, userMessage).chatOptions(chatOptions).build();
 
-        return chatModel.call(prompt).getResult().getOutput().getText();
+        return dashScopeChatModel.call(prompt).getResult().getOutput().getText();
     }
 
     @RequestMapping("/stream/prompt")
@@ -60,6 +60,6 @@ public class ChatModelController {
 
         Prompt prompt = Prompt.builder().messages(message, userMessage).chatOptions(chatOptions).build();
 
-        return chatModel.stream(prompt).map(response -> response.getResult().getOutput().getText());
+        return dashScopeChatModel.stream(prompt).map(response -> response.getResult().getOutput().getText());
     }
 }

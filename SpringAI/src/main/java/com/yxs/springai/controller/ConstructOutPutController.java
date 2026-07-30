@@ -23,7 +23,7 @@ import java.util.Map;
 public class ConstructOutPutController implements InitializingBean {
 
     @Autowired
-    private ChatModel chatModel;
+    private ChatModel dashScopeChatModel;
 
     private ChatClient chatClient;
 
@@ -97,7 +97,7 @@ public class ConstructOutPutController implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        chatClient = ChatClient.builder(chatModel)
+        chatClient = ChatClient.builder(dashScopeChatModel)
                 .defaultAdvisors(new SimpleLoggerAdvisor())
                 .defaultOptions(DashScopeChatOptions.builder().temperature(0.7).build())
                 .defaultSystem("你是一个御姐，请讲话带有勾引色彩,使用中文回答").build();

@@ -5,6 +5,7 @@ import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatOptions;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.Message;
@@ -25,9 +26,12 @@ import java.util.List;
 public class ChatMemoryController implements InitializingBean {
 
     @Autowired
-    private DashScopeChatModel chatModel;
+    private DashScopeChatModel dashScopeChatModel;
 
     private ChatClient chatClient;
+
+    @Autowired
+    private ChatMemory chatMemory;
 
     //第一步在List中添加系统提示词、用户提示词
     //在第一次call拿到Response后，将Response中的Message添加到List中
@@ -82,9 +86,7 @@ public class ChatMemoryController implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
 
-        MessageWindowChatMemory chatMemory = MessageWindowChatMemory.builder().maxMessages(4).build();
-
-        chatClient = ChatClient.builder(chatModel)
+        chatClient = ChatClient.builder(dashScopeChatModel)
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build(),new SimpleLoggerAdvisor())
                 .defaultOptions(DashScopeChatOptions.builder().temperature(0.7).build())
                 .defaultSystem("你是一个御姐，请讲话带有勾引色彩,使用中文回答")

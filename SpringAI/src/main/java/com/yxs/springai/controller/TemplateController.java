@@ -25,7 +25,7 @@ public class TemplateController implements InitializingBean {
     private ChatClient chatClient;
 
     @Autowired
-    private ChatModel chatModel;
+    private ChatModel dashScopeChatModel;
 
     @RequestMapping("/stream")
     public Flux<String> stream(String message, HttpServletResponse response) {
@@ -88,7 +88,7 @@ public class TemplateController implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        chatClient = ChatClient.builder(chatModel)
+        chatClient = ChatClient.builder(dashScopeChatModel)
                 .defaultAdvisors(new SimpleLoggerAdvisor())
                 .defaultOptions(ChatOptions.builder().temperature(0.7).build())
                 .build();
