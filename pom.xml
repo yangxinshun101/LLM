@@ -54,6 +54,11 @@
     <modules>
         <module>SpringAI</module>
         <module>FunctionCall</module>
+        <module>mcp/mcp-client</module>
+        <module>mcp/mcp-server-sse</module>
+        <module>mcp/mcp-server-sse-https</module>
+        <module>mcp/mcp-server-stdio</module>
+        <module>mcp/mcp-server-streamable</module>
     </modules>
 
 
