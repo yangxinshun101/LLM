@@ -1,0 +1,9 @@
+server:
+  port: 8010
+
+spring:
+  application:
+    name: LLM-Rag
+  ai:
+    dashscope:
+      api-key: @dashscope.api.key@

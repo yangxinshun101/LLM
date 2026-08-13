@@ -59,6 +59,7 @@
         <module>mcp/mcp-server-sse-https</module>
         <module>mcp/mcp-server-stdio</module>
         <module>mcp/mcp-server-streamable</module>
+        <module>RAG</module>
     </modules>
 
 

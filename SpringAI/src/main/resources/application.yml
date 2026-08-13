@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: Yxs-LLM
+    name: LLM-SpringAI
   datasource:
     url: jdbc:mysql://122.152.204.49:23306/llm?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true
     username: root
