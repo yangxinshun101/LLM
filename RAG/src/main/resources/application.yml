@@ -7,3 +7,7 @@ spring:
   ai:
     dashscope:
       api-key: @dashscope.api.key@
+      embedding:
+        options:
+          model: text-embedding-v4
+          dimensions: 768
