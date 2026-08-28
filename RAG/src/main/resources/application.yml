@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: LLM-Rag
+  datasource:
+    url: jdbc:postgresql://122.152.204.49:5433/rag_test
+    username: pgvector
+    password: pgvector
   ai:
     dashscope:
       api-key: @dashscope.api.key@
@@ -11,3 +15,11 @@ spring:
         options:
           model: text-embedding-v4
           dimensions: 768
+    vectorstore:
+      pgvector:
+        index-type: hnsw
+        distance-type: cosine_distance
+        dimensions: 768
+        max-document-batch-size: 9
+        initialize-schema: true
+        table-name: vector_st
