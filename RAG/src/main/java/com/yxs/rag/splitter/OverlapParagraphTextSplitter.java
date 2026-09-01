@@ -3,12 +3,13 @@ package com.yxs.rag.splitter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.transformer.splitter.TextSplitter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class OverlapParagraphTextSplitter {
+public class OverlapParagraphTextSplitter extends TextSplitter {
     // 每块最大字符数
     protected final int chunkSize;
 
