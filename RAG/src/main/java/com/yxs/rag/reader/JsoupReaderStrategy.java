@@ -20,6 +20,14 @@ public class JsoupReaderStrategy implements DocumentReaderStrategy {
         return name.endsWith(".html") || name.endsWith(".htm");
     }
 
+    /**
+     * 此方法用于读取HTML文件，并返回一个Document对象。document的对象中包含文件的文本内容、元数据等信息。
+     * 可以通过设置selector来指定提取的元素。
+     * 其实这部分可以做成通用的，然后在Agent中使用py再做详细的处理
+     * @param file
+     * @return
+     * @throws IOException
+     */
     @Override
     public List<Document> read(File file) throws IOException {
         Resource resource = new FileSystemResource(file);

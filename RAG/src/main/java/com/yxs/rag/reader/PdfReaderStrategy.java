@@ -20,6 +20,16 @@ public class PdfReaderStrategy implements DocumentReaderStrategy {
         return name.endsWith(".pdf");
     }
 
+    /**
+     * 读取pdf文件，这里可以通过new不同的Reader来读取pdf文件
+     * 例如：按页读取成Document和按段读取成Document
+     * 其中按页读取是new PagePdfDocumentReader()
+     * 按段读取是new ParagraphPdfDocumentReader()
+     * @param file
+     * @return
+     * @throws IOException
+     */
+
     @Override
     public List<Document> read(File file) throws IOException {
         Resource resource = new FileSystemResource(file);

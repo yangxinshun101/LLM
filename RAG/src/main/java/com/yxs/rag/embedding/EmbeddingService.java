@@ -2,6 +2,7 @@ package com.yxs.rag.embedding;
 
 import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,9 @@ public class EmbeddingService {
             vectorStore.add(batches);
         }
 
+    }
+
+    public List<Document> similaritySearch(SearchRequest query) {
+        return vectorStore.similaritySearch(query);
     }
 }

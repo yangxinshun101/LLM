@@ -20,6 +20,16 @@ public class MarkdownReaderStrategy implements DocumentReaderStrategy {
         return name.endsWith(".md");
     }
 
+    /**
+     * 读取markdown文件，并返回一个Document对象。document的对象中包含文件的文本内容、元数据等信息。
+     * 主要是配置看到底读什么内容，
+     * 例如：是否包含代码块、引用、水平线分割的文档等。
+     * 代码块是指在markdown文件中用```括起来的内容。
+     * 引用是指在markdown文件中用>括起来的内容。
+     * @param file
+     * @return
+     * @throws IOException
+     */
     @Override
     public List<Document> read(File file) throws IOException {
         // 读取配置
