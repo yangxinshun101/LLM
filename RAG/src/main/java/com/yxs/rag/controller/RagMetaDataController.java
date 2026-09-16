@@ -9,6 +9,8 @@ import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvi
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class RagMetaDataController implements InitializingBean {
     private ChatModel chatModel;
     @Autowired
     private VectorStore vectorStore;
+    @Autowired
+    private EmbeddingModel embeddingModel;
     @Autowired
     private DocumentReaderFactory documentReaderFactory;
 
@@ -54,21 +58,35 @@ public class RagMetaDataController implements InitializingBean {
         return "success";
     }
 
-    @RequestMapping("/query")
-    public Flux<String> query(String query, String fileName, HttpServletResponse response) {
+    @RequestMapping("/retrieveWithMetadata")
+    public String retrieveWithMetadata(String query, String fileName, HttpServletResponse response) {
         response.setCharacterEncoding("UTF-8");
-        return chatClient.prompt(query).advisors(advisorSpec -> advisorSpec.param("qa_filter_expression", "fileName == '" + fileName + "'")).stream().content();
+        SearchRequest build = SearchRequest.builder().query(query).filterExpression("fileName == '" + fileName + "'").build();
+        return vectorStore.similaritySearch(build).toString();
+    }
+
+    @RequestMapping("/retrieveAdvisorWithMetadata")
+    public Flux<String> retrieveAdvisorWithMetadata(String query, String fileName, HttpServletResponse response) {
+        response.setCharacterEncoding("UTF-8");
+        return chatClient.prompt(query)
+                .advisors(advisorSpec -> advisorSpec.param("qa_filter_expression", "fileName == '" + fileName + "'"))
+                .stream().content();
     }
 
 
     private ChatClient chatClient;
     @Override
     public void afterPropertiesSet() throws Exception {
-        PromptTemplate promptTemplate = new PromptTemplate("请根据文档内容" +
-                "{question_answer_context}" +
-                "回答问题: {query}"
-        );
+        PromptTemplate promptTemplate = new PromptTemplate("""
+                请基于以下提供的参考文档内容，回答用户的问题。
+                如果参考文档中没有相关信息，请直接说明"没有找到相关信息"，不要编造内容。
+
+                参考文档内容:
+                {question_answer_context}
+                回答问题: {query}
+                """);
         QuestionAnswerAdvisor questionAnswerAdvisor = QuestionAnswerAdvisor.builder(vectorStore)
+                .searchRequest(SearchRequest.builder().similarityThreshold(0.5).topK(5).build())
                 .promptTemplate(promptTemplate)
                 .build();
 
