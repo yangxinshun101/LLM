@@ -24,4 +24,26 @@ public class RagRouterController {
     @Autowired
     private RelationalDatabaseService relationalDatabaseService;
 
+    @RequestMapping("/route")
+    public String route(String query) {
+        String dataBaseType = queryRouteService.route(query);
+
+        String result;
+        switch (dataBaseType) {
+            case "VECTOR":
+                result = vectorDatabaseService.searchVectorDatabase(query);
+                break;
+            case "GRAPH":
+                result = graphDatabaseService.searchGraphDatabase(query);
+                break;
+            case "RELATIONAL":
+                result = relationalDatabaseService.searchRelationalDatabase(query);
+                break;
+            default:
+                result = "无法确定合适的数据库类型";
+        }
+
+        return String.format("Data Base Type: %s, Result: %s", dataBaseType, result);
+    }
+
 }
