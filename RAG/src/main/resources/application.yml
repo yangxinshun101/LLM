@@ -23,3 +23,9 @@ spring:
         max-document-batch-size: 9
         initialize-schema: true
         table-name: vector_st
+
+minio:
+  endpoint: http://122.152.204.49:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucketName: rag-test
