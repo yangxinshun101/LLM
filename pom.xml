@@ -60,6 +60,7 @@
         <module>mcp/mcp-server-stdio</module>
         <module>mcp/mcp-server-streamable</module>
         <module>RAG</module>
+        <module>agent/general-agent</module>
     </modules>
 
 
